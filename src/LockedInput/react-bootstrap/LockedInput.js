@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import "./styles.scss";
+import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
+import "./styles.scss";
 
 const RbsLockedInput = ({
   btnClass,
@@ -13,32 +14,15 @@ const RbsLockedInput = ({
   iconUnlocked,
   id,
   label,
-  locked = false,
+  isLocked = false,
   name,
   onChange,
+  onIconClick,
   placeholder,
   prepended = true,
   type = "text",
   value,
 }) => {
-  const [lockedValue, setLockedValue] = useState(null);
-  const [isLocked, setIsLocked] = useState(locked);
-
-  useEffect(() => {
-    setIsLocked(locked);
-  }, [locked]);
-
-  const resetValueAtUnlock = (lockedValue, event) => {
-    onChange && onChange({ name, value: lockedValue }, event);
-  };
-
-  const onIconClick = (event) => {
-    isLocked && resetValueAtUnlock(lockedValue, event);
-    const newValue = !isLocked && value;
-    setLockedValue(newValue);
-    setIsLocked(!isLocked);
-  };
-
   const bsStyles = {
     inputGroup: `input-group`,
     inputGroupAppend: "input-group-append",
@@ -96,8 +80,7 @@ const RbsLockedInput = ({
           ])}
           id={name}
           readOnly={isLocked}
-          value={lockedValue || value}
-          {...{ name, onChange, placeholder, type }}
+          {...{ name, onChange, placeholder, type, value }}
         />
         {!prepended && (
           <div
@@ -130,10 +113,11 @@ RbsLockedInput.propTypes = {
   disabled: PropTypes.bool,
   iconLocked: PropTypes.node,
   iconUnlocked: PropTypes.node,
+  isLocked: PropTypes.bool,
   label: PropTypes.string,
-  locked: PropTypes.bool,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  onIconClick: PropTypes.func,
   prepended: PropTypes.bool,
   type: PropTypes.oneOf([
     "date",
@@ -152,4 +136,4 @@ RbsLockedInput.propTypes = {
   value: PropTypes.string,
 };
 
-export default RbsLockedInput;
+export default withLogic(RbsLockedInput);

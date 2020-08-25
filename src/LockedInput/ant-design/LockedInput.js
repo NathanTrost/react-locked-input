@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import "./styles.scss";
+import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
+import "./styles.scss";
 
 const AntDLockedInput = ({
   // btnClass,
@@ -12,33 +13,16 @@ const AntDLockedInput = ({
   iconLocked,
   iconUnlocked,
   id,
+  isLocked = false,
   label,
-  locked = false,
   name,
   onChange,
+  onIconClick,
   placeholder,
   prepended = true,
   type,
   value,
 }) => {
-  const [lockedValue, setLockedValue] = useState(null);
-  const [isLocked, setIsLocked] = useState(locked);
-
-  useEffect(() => {
-    setIsLocked(locked);
-  }, [locked]);
-
-  const resetValueAtUnlock = (lockedValue, event) => {
-    onChange && onChange({ name, value: lockedValue }, event);
-  };
-
-  const onIconClick = (event) => {
-    isLocked && resetValueAtUnlock(lockedValue, event);
-    const newValue = !isLocked && value;
-    setLockedValue(newValue);
-    setIsLocked(!isLocked);
-  };
-
   const antdSpecificStyles = {
     item: "ant-form-item",
     itemControl: "ant-form-item-control",
@@ -114,11 +98,8 @@ const AntDLockedInput = ({
                       antdStyles.formControl,
                     ])}
                     id={name}
-                    placeholder={placeholder}
                     readOnly={isLocked}
-                    type={type}
-                    value={lockedValue || value}
-                    {...{ name, onChange }}
+                    {...{ name, onChange, placeholder, type, value }}
                   />
 
                   {!prepended && (
@@ -158,9 +139,10 @@ AntDLockedInput.propTypes = {
   iconLocked: PropTypes.node,
   iconUnlocked: PropTypes.node,
   label: PropTypes.string,
-  locked: PropTypes.bool,
+  isLocked: PropTypes.bool,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  onIconClick: PropTypes.func,
   prepended: PropTypes.bool,
   type: PropTypes.oneOf([
     "date",
@@ -179,4 +161,4 @@ AntDLockedInput.propTypes = {
   value: PropTypes.string,
 };
 
-export default AntDLockedInput;
+export default withLogic(AntDLockedInput);
