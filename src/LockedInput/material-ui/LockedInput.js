@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
@@ -6,6 +6,7 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Grid from "@material-ui/core/Grid";
 
+import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
 
 const MuiLockedInput = ({
@@ -16,32 +17,15 @@ const MuiLockedInput = ({
   iconUnlocked,
   id,
   label,
-  locked = false,
+  isLocked = false,
   name,
   onChange,
+  onIconClick,
   placeholder,
   prepended = true,
   type,
   value,
 }) => {
-  const [lockedValue, setLockedValue] = useState(null);
-  const [isLocked, setIsLocked] = useState(locked);
-
-  useEffect(() => {
-    setIsLocked(locked);
-  }, [locked]);
-
-  const resetValueAtUnlock = (lockedValue, event) => {
-    onChange && onChange({ name, value: lockedValue }, event);
-  };
-
-  const onIconClick = (event) => {
-    isLocked && resetValueAtUnlock(lockedValue, event);
-    const newValue = !isLocked && value;
-    setLockedValue(newValue);
-    setIsLocked(!isLocked);
-  };
-
   const btnProps = {
     id: `${id}-fieldLockButton`,
     locked: isLocked,
@@ -65,8 +49,7 @@ const MuiLockedInput = ({
         <Grid item>
           <Input
             readOnly={isLocked}
-            value={lockedValue || value}
-            {...{ id, name, onChange, placeholder, type }}
+            {...{ id, name, onChange, placeholder, type, value }}
           />
         </Grid>
         {!prepended && (
@@ -96,9 +79,10 @@ MuiLockedInput.propTypes = {
   iconLocked: PropTypes.node,
   iconUnlocked: PropTypes.node,
   label: PropTypes.string,
-  locked: PropTypes.bool,
+  isLocked: PropTypes.bool,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  onIconClick: PropTypes.func,
   prepended: PropTypes.bool,
   type: PropTypes.oneOf([
     "date",
@@ -117,4 +101,4 @@ MuiLockedInput.propTypes = {
   value: PropTypes.string,
 };
 
-export default MuiLockedInput;
+export default withLogic(MuiLockedInput);
