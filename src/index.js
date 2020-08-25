@@ -1,22 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { AntDLockedInput, MuiLockedInput } from "./LockedInput";
+import { AntDLockedInput, MuiLockedInput, RbsLockedInput } from "./LockedInput";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className="container">
-      <div className="input-wrapper">
-        <MuiLockedInput
-          label="Example MUI TextInput"
-          name="mui-locked-example"
+    <div className="demo-container">
+      <div className="demo-input-wrapper">
+        <AntDLockedInput
+          label="Ant Design"
+          name="antd-locked-example"
+          placeholder="Locked Example"
         />
       </div>
-      <div className="input-wrapper">
-        <AntDLockedInput
-          label="Example ANT Design TextInput"
-          name="andt-locked-example"
+
+      <div className="demo-input-wrapper">
+        <MuiLockedInput
+          label="Material Design"
+          name="mui-locked-example"
+          placeholder="Locked Example"
+        />
+      </div>
+
+      <div className="demo-input-wrapper">
+        <RbsLockedInput
+          label="React-Bootstrap"
+          name="rbs-locked-example"
+          placeholder="Locked Example"
         />
       </div>
     </div>
