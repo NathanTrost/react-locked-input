@@ -22,7 +22,8 @@ const FieldLockButton = ({
       id={`${id}-lockedIcon`}
       onClick={onClick}
       style={{
-        cursor: "pointer",
+        color: disabled ? "inherit" : "black",
+        cursor: disabled ? "none" : "pointer",
         margin: "0px 8px 0px 4px",
       }}
     />
@@ -33,7 +34,8 @@ const FieldLockButton = ({
       id={`${id}-unlockedIcon`}
       onClick={onClick}
       style={{
-        cursor: "pointer",
+        color: disabled ? "inherit" : "black",
+        cursor: disabled ? "none" : "pointer",
         margin: "0px 8px 0px 4px",
       }}
     />

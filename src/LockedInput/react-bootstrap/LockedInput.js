@@ -83,7 +83,7 @@ const RbsLockedInput = ({
               "lockedInput-formControl",
               bsStyles.formControl,
             ])}
-            readOnly={isLocked}
+            disabled={isLocked || disabled}
             {...{ id, name, onChange, placeholder, type, value }}
           />
           {!prepended && (

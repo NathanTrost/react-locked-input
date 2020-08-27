@@ -97,7 +97,7 @@ const AntDLockedInput = ({
                         antdStyles.formControl,
                         (isLocked || disabled) && antdStyles.disabledInput,
                       ])}
-                      readOnly={isLocked}
+                      disabled={isLocked || disabled}
                       {...{ id, name, onChange, placeholder, type, value }}
                     />
 
