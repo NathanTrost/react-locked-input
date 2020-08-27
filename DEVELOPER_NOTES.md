@@ -13,5 +13,6 @@ Ant Design LockedInput requires:
   @ant-design/icons
 
 Material UI LockedInput requires:
-@material-ui/core
+Not importing @material-ui/core, using markup only
 @material-ui/icons
+@material-ui/styles
