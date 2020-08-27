@@ -41,6 +41,7 @@ const MuiLockedInput = ({
       "MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth",
     itemExpanded: "MuiGrid-grid-xs-true",
     focusedInput: "Mui-focused",
+    disabled: "Mui-disabled",
   };
 
   const btnProps = {
@@ -78,6 +79,7 @@ const MuiLockedInput = ({
                   "lockedInput-formLabel",
                   muiStyles.formLabel,
                   focused && muiStyles.focusedLabel,
+                  (isLocked || disabled) && muiStyles.disabled,
                 ])}
                 data-shrink={focused}
                 htmlFor={name}
@@ -90,6 +92,7 @@ const MuiLockedInput = ({
               className={classNames([
                 muiStyles.inputContainer,
                 focused && muiStyles.focusedInput,
+                (isLocked || disabled) && muiStyles.disabled,
               ])}
             >
               <input
@@ -97,10 +100,11 @@ const MuiLockedInput = ({
                 className={classNames([
                   "lockedInput-formControl",
                   muiStyles.formControl,
+                  (isLocked || disabled) && muiStyles.disabled,
                 ])}
+                disabled={isLocked || disabled}
                 onBlur={() => setFocus(false)}
                 onFocus={() => setFocus(true)}
-                readOnly={isLocked}
                 {...{ id, name, onChange, placeholder, type, value }}
               />
             </div>

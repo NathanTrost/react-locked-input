@@ -31,9 +31,11 @@ const AntDLockedInput = ({
     controlInput: "ant-form-item-control-input",
     inputContent: "ant-form-item-control-input-content",
     inputGroup: "ant-input-affix-wrapper",
+    inputGroupDisabled: "ant-input-affix-wrapper-disabled",
     inputGroupPrepend: "ant-input-prefix",
     formControl: "ant-input",
     inputGroupAppend: "ant-input-suffix",
+    disabledInput: "ant-input-disabled",
   };
 
   const btnProps = {
@@ -74,6 +76,7 @@ const AntDLockedInput = ({
                     className={classNames([
                       "lockedInput-inputGroup",
                       antdStyles.inputGroup,
+                      (isLocked || disabled) && antdStyles.inputGroupDisabled,
                     ])}
                     style={{ boxSizing: "border-box" }}
                   >
@@ -92,8 +95,9 @@ const AntDLockedInput = ({
                       className={classNames([
                         "lockedInput-formControl",
                         antdStyles.formControl,
+                        (isLocked || disabled) && antdStyles.disabledInput,
                       ])}
-                      readOnly={isLocked}
+                      disabled={isLocked || disabled}
                       {...{ id, name, onChange, placeholder, type, value }}
                     />
 
