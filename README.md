@@ -54,12 +54,12 @@ The API for all three components matches with the exceptions of the `btnClass` a
 
 In the near future I would like to accomplish the following with this project:
 
-- Add support for [Semantic UI](https://semantic-ui.com/)
-- Expand upon accepted props, particularly providing a layout and error/warning props and further tightening and unification of all props.
+- Better styling & behavior to distinquish between locked and unlocked
 - Incorporate [Storybook](https://storybook.js.org/) to run application rather than general `start` script.
+- Expand upon accepted props, particularly providing a layout and error/warning props and further tightening and unification of all props.
+- Find uniform way to deal with btnClass and btnType props, they're currently only being used in the Bootstrap component.
 - Incorporate some unit tests and add [Cypress](https://www.cypress.io/) testing to all functionality.
-- Look in to further reducing dependencies from these libraries.
-- Look in to centralizing file structures for the different components.
+- Add support for [Semantic UI](https://semantic-ui.com/)
 - Look in to extending this component to work for Select inputs as well.
 
 A note on components, I have chosen to move away from pulling in the direct libraries to reduce the size of project, rather using the markup and CSS directly for a leaner experience. Should I break these out to thier own components as a later point, I may revert back to the library reliance.

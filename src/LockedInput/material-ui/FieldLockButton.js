@@ -23,7 +23,7 @@ const FieldLockButton = ({
       onClick={onClick}
       style={{
         cursor: "pointer",
-        minWidth: "36px",
+        margin: "0px 8px 0px 4px",
       }}
     />
   ) : (
@@ -34,7 +34,7 @@ const FieldLockButton = ({
       onClick={onClick}
       style={{
         cursor: "pointer",
-        minWidth: "36px",
+        margin: "0px 8px 0px 4px",
       }}
     />
   );

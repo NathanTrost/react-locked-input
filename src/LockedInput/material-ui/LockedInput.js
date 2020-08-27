@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import classNames from "classnames";
 
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import Grid from "@material-ui/core/Grid";
-
+import { UIComponentProps } from "../common/propTypes";
+import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
+import "./styles.scss";
 
 const MuiLockedInput = ({
   // btnClass,
@@ -16,30 +14,33 @@ const MuiLockedInput = ({
   iconUnlocked,
   id,
   label,
-  locked = false,
+  isLocked = false,
   name,
   onChange,
+  onIconClick,
   placeholder,
   prepended = true,
   type,
   value,
 }) => {
-  const [lockedValue, setLockedValue] = useState(null);
-  const [isLocked, setIsLocked] = useState(locked);
+  const [focused, setFocus] = useState(false);
 
-  useEffect(() => {
-    setIsLocked(locked);
-  }, [locked]);
-
-  const resetValueAtUnlock = (lockedValue, event) => {
-    onChange && onChange({ name, value: lockedValue }, event);
-  };
-
-  const onIconClick = (event) => {
-    isLocked && resetValueAtUnlock(lockedValue, event);
-    const newValue = !isLocked && value;
-    setLockedValue(newValue);
-    setIsLocked(!isLocked);
+  const muiStyles = {
+    formGroup:
+      "MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-end MuiGrid-grid-xs-true",
+    formLabel:
+      "MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated",
+    focusedLabel: "MuiInputLabel-shrink Mui-focused",
+    inputGroup:
+      "MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth",
+    inputGroupPrepend: "MuiGrid-root MuiGrid-item",
+    inputContainer: `MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl`,
+    formControl: "MuiInputBase-input MuiInput-input",
+    inputGroupAppend: "MuiGrid-root MuiGrid-item",
+    inputWrapper:
+      "MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth",
+    itemExpanded: "MuiGrid-grid-xs-true",
+    focusedInput: "Mui-focused",
   };
 
   const btnProps = {
@@ -54,67 +55,72 @@ const MuiLockedInput = ({
   };
 
   return (
-    <div className={classNames(["lockedInput", "lockedInput-formGroup"])}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
-      <Grid container alignItems="flex-end">
+    <div className="lockedInput">
+      <div
+        className={classNames(["lockedInput-formGroup", muiStyles.formGroup])}
+      >
         {prepended && (
-          <Grid item>
+          <div
+            className={classNames([
+              "lockedInput-inputGroupPrepend",
+              muiStyles.inputGroupPrepend,
+            ])}
+          >
             <FieldLockButton {...btnProps} />
-          </Grid>
+          </div>
         )}
-        <Grid item>
-          <Input
-            readOnly={isLocked}
-            value={lockedValue || value}
-            {...{ id, name, onChange, placeholder, type }}
-          />
-        </Grid>
+        <div className={classNames([muiStyles.item, muiStyles.itemExpanded])}>
+          <div className={classNames([muiStyles.inputWrapper])}>
+            {label && (
+              <label
+                aria-label={label}
+                className={classNames([
+                  "lockedInput-formLabel",
+                  muiStyles.formLabel,
+                  focused && muiStyles.focusedLabel,
+                ])}
+                data-shrink={focused}
+                htmlFor={name}
+                title={label}
+              >
+                {label}
+              </label>
+            )}
+            <div
+              className={classNames([
+                muiStyles.inputContainer,
+                focused && muiStyles.focusedInput,
+              ])}
+            >
+              <input
+                aria-describedby={name}
+                className={classNames([
+                  "lockedInput-formControl",
+                  muiStyles.formControl,
+                ])}
+                onBlur={() => setFocus(false)}
+                onFocus={() => setFocus(true)}
+                readOnly={isLocked}
+                {...{ id, name, onChange, placeholder, type, value }}
+              />
+            </div>
+          </div>
+        </div>
         {!prepended && (
-          <Grid item>
+          <div
+            className={classNames([
+              "lockedInput-inputGroupAppend",
+              muiStyles.inputGroupAppend,
+            ])}
+          >
             <FieldLockButton {...btnProps} />
-          </Grid>
+          </div>
         )}
-      </Grid>
+      </div>
     </div>
   );
 };
 
-MuiLockedInput.propTypes = {
-  // btnClass: PropTypes.string,
-  // btnType: PropTypes.oneOf([
-  //   "primary",
-  //   "secondary",
-  //   "success",
-  //   "warning",
-  //   "danger",
-  //   "info",
-  //   "light",
-  //   "dark",
-  //   "link",
-  // ]),
-  disabled: PropTypes.bool,
-  iconLocked: PropTypes.node,
-  iconUnlocked: PropTypes.node,
-  label: PropTypes.string,
-  locked: PropTypes.bool,
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  prepended: PropTypes.bool,
-  type: PropTypes.oneOf([
-    "date",
-    "datetime-local",
-    "email",
-    "file",
-    "month",
-    "number",
-    "password",
-    "tel",
-    "text",
-    "time",
-    "url",
-    "week",
-  ]),
-  value: PropTypes.string,
-};
+MuiLockedInput.propTypes = UIComponentProps;
 
-export default MuiLockedInput;
+export default withLogic(MuiLockedInput);
