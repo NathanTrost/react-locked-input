@@ -44,54 +44,59 @@ const RbsLockedInput = ({
   };
 
   return (
-    <div
-      className={classNames([
-        "lockedInput",
-        "lockedInput-formGroup",
-        bsStyles.formGroup,
-      ])}
-    >
-      {label && (
-        <label
-          className={classNames(["lockedInput-formLabel", bsStyles.formLabel])}
-          htmlFor={name}
-        >
-          {label}
-        </label>
-      )}
+    <div className="lockedInput">
       <div
-        className={classNames(["lockedInput-inputGroup", bsStyles.inputGroup])}
+        className={classNames(["lockedInput-formGroup", bsStyles.formGroup])}
       >
-        {prepended && (
-          <div
+        {label && (
+          <label
+            aria-label={label}
             className={classNames([
-              "lockedInput-inputGroupPrepend",
-              bsStyles.inputGroupPrepend,
+              "lockedInput-formLabel",
+              bsStyles.formLabel,
             ])}
+            htmlFor={name}
+            title={label}
           >
-            <FieldLockButton {...btnProps} />
-          </div>
+            {label}
+          </label>
         )}
-        <input
-          aria-describedby={name}
+        <div
           className={classNames([
-            "lockedInput-formControl",
-            bsStyles.formControl,
+            "lockedInput-inputGroup",
+            bsStyles.inputGroup,
           ])}
-          id={name}
-          readOnly={isLocked}
-          {...{ name, onChange, placeholder, type, value }}
-        />
-        {!prepended && (
-          <div
+        >
+          {prepended && (
+            <div
+              className={classNames([
+                "lockedInput-inputGroupPrepend",
+                bsStyles.inputGroupPrepend,
+              ])}
+            >
+              <FieldLockButton {...btnProps} />
+            </div>
+          )}
+          <input
+            aria-describedby={name}
             className={classNames([
-              "lockedInput-inputGroupAppend",
-              bsStyles.inputGroupAppend,
+              "lockedInput-formControl",
+              bsStyles.formControl,
             ])}
-          >
-            <FieldLockButton {...btnProps} />
-          </div>
-        )}
+            readOnly={isLocked}
+            {...{ id, name, onChange, placeholder, type, value }}
+          />
+          {!prepended && (
+            <div
+              className={classNames([
+                "lockedInput-inputGroupAppend",
+                bsStyles.inputGroupAppend,
+              ])}
+            >
+              <FieldLockButton {...btnProps} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

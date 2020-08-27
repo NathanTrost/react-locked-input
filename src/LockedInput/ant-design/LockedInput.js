@@ -51,67 +51,65 @@ const AntDLockedInput = ({
   };
 
   return (
-    <div
-      className={classNames([
-        "lockedInput",
-        "lockedInput-formGroup",
-        antdStyles.formGroup,
-      ])}
-    >
-      <div className="ant-form-item">
-        {label && (
-          <div
-            className={classNames([
-              "lockedInput-formLabel",
-              antdStyles.formLabel,
-            ])}
-          >
-            <label htmlFor={name} title={label}>
-              {label}
-            </label>
-          </div>
-        )}
-        <div className={antdSpecificStyles.item}>
-          <div className={antdSpecificStyles.itemControl}>
-            <div className={antdSpecificStyles.controlInput}>
-              <div className={antdSpecificStyles.inputContent}>
-                <div
-                  className={classNames([
-                    "lockedInput-inputGroup",
-                    antdStyles.inputGroup,
-                  ])}
-                >
-                  {prepended && (
-                    <span
-                      className={classNames([
-                        "lockedInput-inputGroupPrepend",
-                        antdStyles.inputGroupPrepend,
-                      ])}
-                    >
-                      <FieldLockButton {...btnProps} />
-                    </span>
-                  )}
-                  <input
-                    aria-describedby={name}
+    <div className="lockedInput">
+      <div
+        className={classNames(["lockedInput-formGroup", antdStyles.formGroup])}
+      >
+        <div className="ant-form-item">
+          {label && (
+            <div
+              aria-label={label}
+              className={classNames([
+                "lockedInput-formLabel",
+                antdStyles.formLabel,
+              ])}
+            >
+              <label htmlFor={name} title={label}>
+                {label}
+              </label>
+            </div>
+          )}
+          <div className={antdSpecificStyles.item}>
+            <div className={antdSpecificStyles.itemControl}>
+              <div className={antdSpecificStyles.controlInput}>
+                <div className={antdSpecificStyles.inputContent}>
+                  <div
                     className={classNames([
-                      "lockedInput-formControl",
-                      antdStyles.formControl,
+                      "lockedInput-inputGroup",
+                      antdStyles.inputGroup,
                     ])}
-                    id={name}
-                    readOnly={isLocked}
-                    {...{ name, onChange, placeholder, type, value }}
-                  />
-
-                  {!prepended && (
-                    <span
+                  >
+                    {prepended && (
+                      <span
+                        className={classNames([
+                          "lockedInput-inputGroupPrepend",
+                          antdStyles.inputGroupPrepend,
+                        ])}
+                      >
+                        <FieldLockButton {...btnProps} />
+                      </span>
+                    )}
+                    <input
+                      aria-describedby={name}
                       className={classNames([
-                        "lockedInput-inputGroupAppend",
-                        antdStyles.inputGroupAppend,
+                        "lockedInput-formControl",
+                        antdStyles.formControl,
                       ])}
-                    >
-                      <FieldLockButton {...btnProps} />
-                    </span>
-                  )}
+                      readOnly={isLocked}
+                      {...{ id, name, onChange, placeholder, type, value }}
+                    />
+
+                    {!prepended && (
+                      <span
+                        className={classNames([
+                          "lockedInput-inputGroupAppend",
+                          antdStyles.inputGroupAppend,
+                        ])}
+                      >
+                        <FieldLockButton {...btnProps} />
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

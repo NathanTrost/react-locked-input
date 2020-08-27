@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 
 import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
+import "./styles.scss";
 
 const MuiLockedInput = ({
   // btnClass,
@@ -26,7 +26,7 @@ const MuiLockedInput = ({
   const [focused, setFocus] = useState(false);
 
   const muiSpecificStyles = {
-    itemContainer:
+    inputGroup:
       "MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-end",
     item: "MuiGrid-root MuiGrid-item",
     focusedInput: "Mui-focused",
@@ -54,44 +54,68 @@ const MuiLockedInput = ({
   };
 
   return (
-    <div className={classNames(["lockedInput", "lockedInput-formGroup"])}>
-      {label && (
-        <label
+    <div className="lockedInput">
+      <div className="lockedInput-formGroup">
+        {label && (
+          <label
+            aria-label={label}
+            className={classNames([
+              "lockedInput-formLabel",
+              muiStyles.formLabel,
+            ])}
+            htmlFor={name}
+            title={label}
+          >
+            {label}
+          </label>
+        )}
+        <div
           className={classNames([
-            "lockedInput-formLabel",
-            muiStyles.formLabel,
-            focused && muiSpecificStyles.focusedInput,
+            "lockedInput-inputGroup",
+            muiSpecificStyles.inputGroup,
           ])}
-          htmlFor={name}
         >
-          {label}
-        </label>
-      )}
-      <div className={classNames([muiSpecificStyles.itemContainer])}>
-        {prepended && (
-          <div className={classNames([muiSpecificStyles.item])}>
-            <FieldLockButton {...btnProps} />
-          </div>
-        )}
-        <div className={classNames([muiSpecificStyles.item])}>
-          <div className={classNames([muiSpecificStyles.inputContainer])}>
-            <input
+          {prepended && (
+            <div
               className={classNames([
-                "lockedInput-formControl",
-                muiStyles.formControl,
+                "lockedInput-inputGroupPrepend",
+                muiSpecificStyles.item,
               ])}
-              onBlur={() => setFocus(false)}
-              onFocus={() => setFocus(true)}
-              readOnly={isLocked}
-              {...{ id, name, onChange, placeholder, type, value }}
-            />
-          </div>
-        </div>
-        {!prepended && (
+            >
+              <FieldLockButton {...btnProps} />
+            </div>
+          )}
           <div className={classNames([muiSpecificStyles.item])}>
-            <FieldLockButton {...btnProps} />
+            <div
+              className={classNames([
+                muiSpecificStyles.inputContainer,
+                focused && muiSpecificStyles.focusedInput,
+              ])}
+            >
+              <input
+                aria-describedby={name}
+                className={classNames([
+                  "lockedInput-formControl",
+                  muiStyles.formControl,
+                ])}
+                onBlur={() => setFocus(false)}
+                onFocus={() => setFocus(true)}
+                readOnly={isLocked}
+                {...{ id, name, onChange, placeholder, type, value }}
+              />
+            </div>
           </div>
-        )}
+          {!prepended && (
+            <div
+              className={classNames([
+                "lockedInput-inputGroupAppend",
+                muiSpecificStyles.item,
+              ])}
+            >
+              <FieldLockButton {...btnProps} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
