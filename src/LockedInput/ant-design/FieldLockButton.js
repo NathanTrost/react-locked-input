@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import UnlockFilled from "@ant-design/icons/UnlockFilled";
+import UnlockOutlined from "@ant-design/icons/UnlockOutlined";
 import LockFilled from "@ant-design/icons/LockFilled";
 
 const FieldLockButton = ({
   disabled = false,
   iconLocked = LockFilled,
-  iconUnlocked = UnlockFilled,
+  iconUnlocked = UnlockOutlined,
   id,
   locked,
   onClick,
@@ -22,7 +22,8 @@ const FieldLockButton = ({
       id={`${id}-lockedIcon`}
       onClick={onClick}
       style={{
-        cursor: "pointer",
+        color: disabled ? "inherit" : "black",
+        cursor: disabled ? "none" : "pointer",
         margin: "0px 8px 0px 4px",
       }}
     />
@@ -32,7 +33,8 @@ const FieldLockButton = ({
       id={`${id}-unLockedIcon`}
       onClick={onClick}
       style={{
-        cursor: "pointer",
+        color: disabled ? "inherit" : "black",
+        cursor: disabled ? "none" : "pointer",
         margin: "0px 8px 0px 4px",
       }}
     />
