@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import { UIComponentProps } from "../common/propTypes";
 import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
 import "./styles.scss";
@@ -44,96 +44,64 @@ const RbsLockedInput = ({
   };
 
   return (
-    <div
-      className={classNames([
-        "lockedInput",
-        "lockedInput-formGroup",
-        bsStyles.formGroup,
-      ])}
-    >
-      {label && (
-        <label
-          className={classNames(["lockedInput-formLabel", bsStyles.formLabel])}
-          htmlFor={name}
-        >
-          {label}
-        </label>
-      )}
+    <div className="lockedInput">
       <div
-        className={classNames(["lockedInput-inputGroup", bsStyles.inputGroup])}
+        className={classNames(["lockedInput-formGroup", bsStyles.formGroup])}
       >
-        {prepended && (
-          <div
+        {label && (
+          <label
+            aria-label={label}
             className={classNames([
-              "lockedInput-inputGroupPrepend",
-              bsStyles.inputGroupPrepend,
+              "lockedInput-formLabel",
+              bsStyles.formLabel,
             ])}
+            htmlFor={name}
+            title={label}
           >
-            <FieldLockButton {...btnProps} />
-          </div>
+            {label}
+          </label>
         )}
-        <input
-          aria-describedby={name}
+        <div
           className={classNames([
-            "lockedInput-formControl",
-            bsStyles.formControl,
+            "lockedInput-inputGroup",
+            bsStyles.inputGroup,
           ])}
-          id={name}
-          readOnly={isLocked}
-          {...{ name, onChange, placeholder, type, value }}
-        />
-        {!prepended && (
-          <div
+        >
+          {prepended && (
+            <div
+              className={classNames([
+                "lockedInput-inputGroupPrepend",
+                bsStyles.inputGroupPrepend,
+              ])}
+            >
+              <FieldLockButton {...btnProps} />
+            </div>
+          )}
+          <input
+            aria-describedby={name}
             className={classNames([
-              "lockedInput-inputGroupAppend",
-              bsStyles.inputGroupAppend,
+              "lockedInput-formControl",
+              bsStyles.formControl,
             ])}
-          >
-            <FieldLockButton {...btnProps} />
-          </div>
-        )}
+            readOnly={isLocked}
+            {...{ id, name, onChange, placeholder, type, value }}
+          />
+          {!prepended && (
+            <div
+              className={classNames([
+                "lockedInput-inputGroupAppend",
+                bsStyles.inputGroupAppend,
+              ])}
+            >
+              <FieldLockButton {...btnProps} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-RbsLockedInput.propTypes = {
-  btnClass: PropTypes.string,
-  btnType: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "success",
-    "warning",
-    "danger",
-    "info",
-    "light",
-    "dark",
-    "link",
-  ]),
-  disabled: PropTypes.bool,
-  iconLocked: PropTypes.node,
-  iconUnlocked: PropTypes.node,
-  isLocked: PropTypes.bool,
-  label: PropTypes.string,
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  onIconClick: PropTypes.func,
-  prepended: PropTypes.bool,
-  type: PropTypes.oneOf([
-    "date",
-    "datetime-local",
-    "email",
-    "file",
-    "month",
-    "number",
-    "password",
-    "tel",
-    "text",
-    "time",
-    "url",
-    "week",
-  ]),
-  value: PropTypes.string,
-};
+RbsLockedInput.propTypes = UIComponentProps;
 
 export default withLogic(RbsLockedInput);

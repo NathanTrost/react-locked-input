@@ -14,6 +14,7 @@
 
 # using library directly/in flight
 /src/LockedInput/*-components
+/src/LockedInput/*-styled
 
 # misc
 .DS_Store
