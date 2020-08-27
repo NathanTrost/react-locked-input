@@ -24,7 +24,7 @@
     "rimraf": "3.0.2"
   },
   "scripts": {
-    "start:app": "react-scripts start",
+    "start": "react-scripts start",
     "clean": "rimraf dist",
     "build:app": "react-scripts build",
     "build:components": "npm run clean && cross-env NODE_ENV=production babel src/LockedInput --out-dir lib --copy-files",
