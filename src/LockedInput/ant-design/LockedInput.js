@@ -23,20 +23,17 @@ const AntDLockedInput = ({
   type,
   value,
 }) => {
-  const antdSpecificStyles = {
-    item: "ant-form-item",
-    itemControl: "ant-form-item-control",
-    controlInput: "ant-form-item-control-input",
-    inputContent: "ant-form-item-control-input-content",
-  };
-
   const antdStyles = {
+    formGroup: `ant-form`,
+    formLabel: "ant-form-item-label",
+    item: "ant-form-item", //
+    itemControl: "ant-form-item-control", //
+    controlInput: "ant-form-item-control-input", //
+    inputContent: "ant-form-item-control-input-content", //
     inputGroup: "ant-input-affix-wrapper",
-    inputGroupAppend: "ant-input-suffix",
     inputGroupPrepend: "ant-input-prefix",
     formControl: "ant-input",
-    formLabel: "ant-form-item-label",
-    formGroup: `ant-form`,
+    inputGroupAppend: "ant-input-suffix",
   };
 
   const btnProps = {
@@ -55,7 +52,7 @@ const AntDLockedInput = ({
       <div
         className={classNames(["lockedInput-formGroup", antdStyles.formGroup])}
       >
-        <div className="ant-form-item">
+        <div className={antdStyles.item}>
           {label && (
             <div
               aria-label={label}
@@ -69,15 +66,16 @@ const AntDLockedInput = ({
               </label>
             </div>
           )}
-          <div className={antdSpecificStyles.item}>
-            <div className={antdSpecificStyles.itemControl}>
-              <div className={antdSpecificStyles.controlInput}>
-                <div className={antdSpecificStyles.inputContent}>
+          <div className={antdStyles.item}>
+            <div className={antdStyles.itemControl}>
+              <div className={antdStyles.controlInput}>
+                <div className={antdStyles.inputContent}>
                   <div
                     className={classNames([
                       "lockedInput-inputGroup",
                       antdStyles.inputGroup,
                     ])}
+                    style={{ boxSizing: "border-box" }}
                   >
                     {prepended && (
                       <span

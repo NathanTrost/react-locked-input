@@ -25,21 +25,22 @@ const MuiLockedInput = ({
 }) => {
   const [focused, setFocus] = useState(false);
 
-  const muiSpecificStyles = {
-    inputGroup:
-      "MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-end",
-    item: "MuiGrid-root MuiGrid-item",
-    focusedInput: "Mui-focused",
-    inputContainer: `MuiInputBase-root MuiInput-root MuiInput-underline`,
-  };
-
   const muiStyles = {
-    inputGroup: "ant-input-affix-wrapper",
-    inputGroupAppend: "ant-input-suffix",
-    inputGroupPrepend: "ant-input-prefix",
+    formGroup:
+      "MuiGrid-root MuiGrid-container MuiGrid-align-items-xs-flex-end MuiGrid-grid-xs-true",
+    formLabel:
+      "MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated",
+    focusedLabel: "MuiInputLabel-shrink Mui-focused",
+    inputGroup:
+      "MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth",
+    inputGroupPrepend: "MuiGrid-root MuiGrid-item",
+    inputContainer: `MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl`,
     formControl: "MuiInputBase-input MuiInput-input",
-    formLabel: "MuiFormLabel-root MuiInputLabel-root MuiInputLabel-animated",
-    formGroup: "",
+    inputGroupAppend: "MuiGrid-root MuiGrid-item",
+    inputWrapper:
+      "MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth",
+    itemExpanded: "MuiGrid-grid-xs-true",
+    focusedInput: "Mui-focused",
   };
 
   const btnProps = {
@@ -55,41 +56,40 @@ const MuiLockedInput = ({
 
   return (
     <div className="lockedInput">
-      <div className="lockedInput-formGroup">
-        {label && (
-          <label
-            aria-label={label}
+      <div
+        className={classNames(["lockedInput-formGroup", muiStyles.formGroup])}
+      >
+        {prepended && (
+          <div
             className={classNames([
-              "lockedInput-formLabel",
-              muiStyles.formLabel,
+              "lockedInput-inputGroupPrepend",
+              muiStyles.inputGroupPrepend,
             ])}
-            htmlFor={name}
-            title={label}
           >
-            {label}
-          </label>
+            <FieldLockButton {...btnProps} />
+          </div>
         )}
-        <div
-          className={classNames([
-            "lockedInput-inputGroup",
-            muiSpecificStyles.inputGroup,
-          ])}
-        >
-          {prepended && (
+        <div className={classNames([muiStyles.item, muiStyles.itemExpanded])}>
+          <div className={classNames([muiStyles.inputWrapper])}>
+            {label && (
+              <label
+                aria-label={label}
+                className={classNames([
+                  "lockedInput-formLabel",
+                  muiStyles.formLabel,
+                  focused && muiStyles.focusedLabel,
+                ])}
+                data-shrink={focused}
+                htmlFor={name}
+                title={label}
+              >
+                {label}
+              </label>
+            )}
             <div
               className={classNames([
-                "lockedInput-inputGroupPrepend",
-                muiSpecificStyles.item,
-              ])}
-            >
-              <FieldLockButton {...btnProps} />
-            </div>
-          )}
-          <div className={classNames([muiSpecificStyles.item])}>
-            <div
-              className={classNames([
-                muiSpecificStyles.inputContainer,
-                focused && muiSpecificStyles.focusedInput,
+                muiStyles.inputContainer,
+                focused && muiStyles.focusedInput,
               ])}
             >
               <input
@@ -105,17 +105,17 @@ const MuiLockedInput = ({
               />
             </div>
           </div>
-          {!prepended && (
-            <div
-              className={classNames([
-                "lockedInput-inputGroupAppend",
-                muiSpecificStyles.item,
-              ])}
-            >
-              <FieldLockButton {...btnProps} />
-            </div>
-          )}
         </div>
+        {!prepended && (
+          <div
+            className={classNames([
+              "lockedInput-inputGroupAppend",
+              muiStyles.inputGroupAppend,
+            ])}
+          >
+            <FieldLockButton {...btnProps} />
+          </div>
+        )}
       </div>
     </div>
   );
