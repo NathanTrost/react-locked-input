@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import { UIComponentProps } from "../common/propTypes";
 import withLogic from "../common/withLogic";
 import FieldLockButton from "./FieldLockButton";
 import "./styles.scss";
@@ -121,43 +121,6 @@ const MuiLockedInput = ({
   );
 };
 
-MuiLockedInput.propTypes = {
-  // btnClass: PropTypes.string,
-  // btnType: PropTypes.oneOf([
-  //   "primary",
-  //   "secondary",
-  //   "success",
-  //   "warning",
-  //   "danger",
-  //   "info",
-  //   "light",
-  //   "dark",
-  //   "link",
-  // ]),
-  disabled: PropTypes.bool,
-  iconLocked: PropTypes.node,
-  iconUnlocked: PropTypes.node,
-  label: PropTypes.string,
-  isLocked: PropTypes.bool,
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  onIconClick: PropTypes.func,
-  prepended: PropTypes.bool,
-  type: PropTypes.oneOf([
-    "date",
-    "datetime-local",
-    "email",
-    "file",
-    "month",
-    "number",
-    "password",
-    "tel",
-    "text",
-    "time",
-    "url",
-    "week",
-  ]),
-  value: PropTypes.string,
-};
+MuiLockedInput.propTypes = UIComponentProps;
 
 export default withLogic(MuiLockedInput);
