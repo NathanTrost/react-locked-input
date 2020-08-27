@@ -56,7 +56,6 @@ In the near future I would like to accomplish the following with this project:
 
 - Better styling & behavior to distinquish between locked and unlocked
 - Incorporate [Storybook](https://storybook.js.org/) to run application rather than general `start` script.
-- Remove dependency from Material UI library.
 - Expand upon accepted props, particularly providing a layout and error/warning props and further tightening and unification of all props.
 - Find uniform way to deal with btnClass and btnType props, they're currently only being used in the Bootstrap component.
 - Incorporate some unit tests and add [Cypress](https://www.cypress.io/) testing to all functionality.

@@ -26,10 +26,10 @@ const AntDLockedInput = ({
   const antdStyles = {
     formGroup: `ant-form`,
     formLabel: "ant-form-item-label",
-    item: "ant-form-item", //
-    itemControl: "ant-form-item-control", //
-    controlInput: "ant-form-item-control-input", //
-    inputContent: "ant-form-item-control-input-content", //
+    item: "ant-form-item",
+    itemControl: "ant-form-item-control",
+    controlInput: "ant-form-item-control-input",
+    inputContent: "ant-form-item-control-input-content",
     inputGroup: "ant-input-affix-wrapper",
     inputGroupPrepend: "ant-input-prefix",
     formControl: "ant-input",
@@ -54,17 +54,17 @@ const AntDLockedInput = ({
       >
         <div className={antdStyles.item}>
           {label && (
-            <div
+            <label
               aria-label={label}
               className={classNames([
                 "lockedInput-formLabel",
                 antdStyles.formLabel,
               ])}
+              htmlFor={name}
+              title={label}
             >
-              <label htmlFor={name} title={label}>
-                {label}
-              </label>
-            </div>
+              {label}
+            </label>
           )}
           <div className={antdStyles.item}>
             <div className={antdStyles.itemControl}>
