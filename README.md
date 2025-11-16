@@ -62,4 +62,6 @@ In the near future I would like to accomplish the following with this project:
 - Add support for [Semantic UI](https://semantic-ui.com/)
 - Look in to extending this component to work for Select inputs as well.
 
-A note on components, I have chosen to move away from pulling in the direct libraries to reduce the size of project, rather using the markup and CSS directly for a leaner experience. Should I break these out to thier own components as a later point, I may revert back to the library reliance.
+A note on components, I have chosen to move away from pulling in the direct libraries to reduce the size of project, rather using the markup and CSS directly for a leaner experience. Should I break these out to thier own components at a later point, I may revert back to the library reliance.
+
+**Note:** This project was created in 2020 as an exploration of cross-library component abstraction patterns. While no longer actively maintained, it demonstrates early thinking about unified component APIs—concepts I've continued to apply in production design systems throughout my career.
